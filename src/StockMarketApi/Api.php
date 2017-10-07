@@ -1,6 +1,6 @@
 <?php
 
-namespace Boot\Stock;
+namespace StockMarketApi;
 
 class Api {
 
