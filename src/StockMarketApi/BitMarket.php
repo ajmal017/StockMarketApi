@@ -1,8 +1,10 @@
 <?php
 
-namespace Boot\Stock;
+namespace StockMarketApi;
 
-class BitMarket extends \Boot\Stock\Api {
+use StockMarketApi\Api;
+
+class BitMarket extends Api {
 
     protected $url = 'https://www.bitmarket.pl/json/BTCPLN/orderbook.json';
 
