@@ -3,7 +3,7 @@
 namespace StockMarketApi;
 
 
-class Bitbay {
+class BitBay {
 
     public function orderbook() {
         $orderbookJson = file_get_contents('https://bitbay.net/API/Public/BTCPLN/orderbook.json');
