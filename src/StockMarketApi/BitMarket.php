@@ -49,6 +49,8 @@ class BitMarket extends Api {
         if ($iloscBTC < $BTC) {
             throw new \Exception('Nieudało się wyliczyć realnej ceny zamało ofert spzedarzy dla BTC=' . $BTC);
         }
-        return ($wartoscTranzakcji / $iloscBTC);
+        
+        $cena = $wartoscTranzakcji / $iloscBTC;
+        return $iloscBTC * $cena;
     }
 }
