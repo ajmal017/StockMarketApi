@@ -10,8 +10,27 @@ class BitMarket extends Api {
 
     const ORDER_BOOK_PRICE = 0;
     const ORDER_BOOK_COUNT = 1;
-
-    public function realnaCena($BTC = 1) {
+    
+    public function reverseEvaluation($PLN = 1) {
+        
+        $iloscPLN = 0;
+        $wartoscTranzakcji = 0;
+        foreach ($this->getOrderBook()->asks as $orderBookRow) {
+            $wartoscTranzakcji +=
+                    $orderBookRow[self::ORDER_BOOK_PRICE] *
+                    $orderBookRow[self::ORDER_BOOK_COUNT];
+            $iloscPLN += $orderBookRow[self::ORDER_BOOK_PRICE];
+            if ($iloscPLN >= $PLN) {
+                break;
+            }
+        }
+        if ($iloscPLN < $PLN) {
+            throw new \Exception('Nieudało się wyliczyć realnej ceny zamało ofert spzedarzy dla PLN=' . $PLN);
+        }
+        return ($wartoscTranzakcji / $iloscPLN);
+    }
+    
+    public function evaluation($BTC = 1) {
         
         $iloscBTC = 0;
         $wartoscTranzakcji = 0;
