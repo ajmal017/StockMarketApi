@@ -10,16 +10,15 @@ class BitMarket extends Api {
 
     const ORDER_BOOK_PRICE = 0;
     const ORDER_BOOK_COUNT = 1;
-    
+
     public function reverseEvaluation($PLN = 1) {
-        
+
         $iloscBTC = 0;
         $wartoscTranzakcji = 0;
         foreach ($this->getOrderBook()->asks as $orderBookRow) {
-            $wartoscTranzakcji +=
-                    $orderBookRow[self::ORDER_BOOK_PRICE] *
+            $wartoscTranzakcji += $orderBookRow[self::ORDER_BOOK_PRICE] *
                     $orderBookRow[self::ORDER_BOOK_COUNT];
-            $iloscBTC += $orderBookRow[self::ORDER_BOOK_COUNT]; 
+            $iloscBTC += $orderBookRow[self::ORDER_BOOK_COUNT];
             if ($wartoscTranzakcji >= $PLN) {
                 break;
             }
@@ -27,19 +26,18 @@ class BitMarket extends Api {
         if ($wartoscTranzakcji < $PLN) {
             throw new \Exception('Nieudało się wyliczyć realnej ceny zamało ofert spzedarzy dla PLN=' . $PLN);
         }
-       
-        $cena = $iloscBTC/$wartoscTranzakcji;
-      
-        return $PLN*$cena ;
+
+        $cena = $iloscBTC / $wartoscTranzakcji;
+
+        return $PLN * $cena;
     }
-    
+
     public function evaluation($BTC = 1) {
-        
+
         $iloscBTC = 0;
         $wartoscTranzakcji = 0;
         foreach ($this->getOrderBook()->asks as $orderBookRow) {
-            $wartoscTranzakcji +=
-                    $orderBookRow[self::ORDER_BOOK_PRICE] *
+            $wartoscTranzakcji += $orderBookRow[self::ORDER_BOOK_PRICE] *
                     $orderBookRow[self::ORDER_BOOK_COUNT];
             $iloscBTC += $orderBookRow[self::ORDER_BOOK_COUNT];
             if ($iloscBTC >= $BTC) {
@@ -49,8 +47,9 @@ class BitMarket extends Api {
         if ($iloscBTC < $BTC) {
             throw new \Exception('Nieudało się wyliczyć realnej ceny zamało ofert spzedarzy dla BTC=' . $BTC);
         }
-        
+
         $cena = $wartoscTranzakcji / $iloscBTC;
-        return $iloscBTC * $cena;
+        return $BTC * $cena;
     }
+
 }
