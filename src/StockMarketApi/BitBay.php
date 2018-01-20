@@ -4,7 +4,7 @@ namespace StockMarketApi;
 
 class BitBay {
 
-    private $baseCurrency = 'PLN';
+    private $baseCurrency = 'USD';
 
     public function setBaseCurrency($baseCurrency) {
         $this->baseCurrency = $baseCurrency;
