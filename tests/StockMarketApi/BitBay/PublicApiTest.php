@@ -15,9 +15,6 @@ class PublicApiTest extends TestCase {
     }
     public function testOrderbook(){
         $ret = $this->api->orderbook();
-        
-       // var_dump(is_float($ret->asks[0][0]));exit;
-        
         $this->assertEquals(true,property_exists($ret,'bids'));
         $this->assertEquals(true,property_exists($ret,'asks'));
         $this->assertEquals(true, is_array($ret->bids));
